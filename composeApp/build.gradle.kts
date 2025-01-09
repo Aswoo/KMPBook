@@ -19,7 +19,7 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -30,11 +30,15 @@ kotlin {
             isStatic = true
         }
     }
+
+//    jvm("desktop")
+
     room {
         schemaDirectory("$projectDir/schemas")
     }
-    
+
     sourceSets {
+//        val desktopMain by getting
 
         androidMain.dependencies {
             implementation(compose.preview)
@@ -66,6 +70,13 @@ kotlin {
 
             implementation(libs.bundles.ktor)
             implementation(libs.bundles.coil)
+        }
+        nativeMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+        }
+
+        dependencies {
+            ksp(libs.androidx.room.compiler)
         }
     }
 }
